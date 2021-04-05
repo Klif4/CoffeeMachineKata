@@ -4,6 +4,8 @@ import static domain.Drink.CHOCOLATE;
 import static domain.Drink.COFFEE;
 import static domain.Drink.TEA;
 import static domain.Sugar.ONE;
+import static domain.Sugar.TWO;
+import static domain.Sugar.ZERO;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
@@ -82,4 +84,37 @@ class OrderTest {
     Amount price = new Order(CHOCOLATE, ONE).price();
     assertThat(price).isEqualTo(new Amount(new BigDecimal("0.5")));
   }
+
+
+  @Test
+  void hot_coffee_with_2_sugar_should_return_Ch20() {
+    Order order = new Order(Drink.HOT_COFFEE, Sugar.TWO);
+    assertThat(order.code()).isEqualTo("Ch:2:0");
+  }
+
+  @Test
+  void hot_tea_with_2_sugar_should_return_Th20() {
+    Order order = new Order(Drink.HOT_TEA, Sugar.TWO);
+    assertThat(order.code()).isEqualTo("Th:2:0");
+  }
+
+  @Test
+  void hot_chocolate_with_2_sugar_should_return_Hh20() {
+    Order order = new Order(Drink.HOT_CHOCOLATE, Sugar.TWO);
+    assertThat(order.code()).isEqualTo("Hh:2:0");
+  }
+
+  @Test
+  void orange_juice_should_return_O() {
+    Order order = new Order(Drink.ORANGE_JUICE, ZERO);
+    assertThat(order.code()).isEqualTo("O::");
+  }
+
+  @Test
+  void orange_juice_with_sugar_should_return_O() {
+    Order order = new Order(Drink.ORANGE_JUICE, TWO);
+    assertThat(order.code()).isEqualTo("O::");
+  }
+
+
 }

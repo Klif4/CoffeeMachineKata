@@ -1,5 +1,8 @@
 package domain;
 
+import static domain.Drink.ORANGE_JUICE;
+import static domain.Sugar.ZERO;
+
 public class Order {
 
   private final Drink drink;
@@ -7,7 +10,7 @@ public class Order {
 
   public Order(Drink drink, Sugar sugar) {
     this.drink = drink;
-    this.sugar = sugar;
+    this.sugar = drink.equals(ORANGE_JUICE) ? ZERO : sugar;
   }
 
   public String code() {

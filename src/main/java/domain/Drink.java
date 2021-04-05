@@ -5,7 +5,11 @@ import java.math.BigDecimal;
 public enum Drink {
   COFFEE("C:", DrinkPrices.COFFEE_PRICE),
   TEA("T:", DrinkPrices.TEA_PRICE),
-  CHOCOLATE("H:", DrinkPrices.CHOCOLATE_PRICE);
+  CHOCOLATE("H:", DrinkPrices.CHOCOLATE_PRICE),
+  HOT_COFFEE("Ch:", DrinkPrices.COFFEE_PRICE),
+  HOT_TEA("Th:", DrinkPrices.TEA_PRICE),
+  HOT_CHOCOLATE("Hh:", DrinkPrices.CHOCOLATE_PRICE),
+  ORANGE_JUICE("O:", DrinkPrices.ORANGE_JUICE_PRICE);
 
   private final String code;
   private final Amount price;
@@ -26,6 +30,7 @@ public enum Drink {
     public static final Amount COFFEE_PRICE = new Amount(new BigDecimal("0.6"));
     public static final Amount TEA_PRICE = new Amount(new BigDecimal("0.4"));
     public static final Amount CHOCOLATE_PRICE = new Amount(new BigDecimal("0.5"));
+    public static final Amount ORANGE_JUICE_PRICE = new Amount(new BigDecimal("0.6"));
   }
 
 }
