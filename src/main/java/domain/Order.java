@@ -13,4 +13,8 @@ public class Order {
   public String code() {
     return drink.code() + sugar.sugarsAndStickCode();
   }
+
+  public Amount price() {
+    return drink.price();
+  }
 }
