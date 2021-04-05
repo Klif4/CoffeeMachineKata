@@ -2,8 +2,8 @@ package domain;
 
 public class CoffeeMachine {
 
-  public String order(Drink drink, Sugar sugar) {
-    return drink.code() + sugar.sugarsAndStickCode();
+  public String makeOrder(Order order) {
+    return order.code();
   }
 
   public String message(String message) {
