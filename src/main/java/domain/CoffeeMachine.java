@@ -2,8 +2,10 @@ package domain;
 
 public class CoffeeMachine {
 
-  public String order(Drink drink, Sugar sugar) {
-    return drink.code() + sugar.sugarsAndStickCode();
+  public String makeOrder(Order order, Amount customerMoney) {
+    return customerMoney.isEnoughFor(order.price()) ?
+        order.code() :
+        message("Missing " + customerMoney.difference(order.price()).value());
   }
 
   public String message(String message) {

@@ -1,7 +1,10 @@
 package domain;
 
+import static domain.Drink.COFFEE;
+import static domain.Sugar.ONE;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 
 class CoffeeMachineTest {
@@ -9,62 +12,22 @@ class CoffeeMachineTest {
   private final CoffeeMachine coffeeMachine = new CoffeeMachine();
 
   @Test
-  void order_coffee_with_0_sugar_should_return_C() {
-    String order = coffeeMachine.order(Drink.COFFEE, Sugar.ZERO);
-    assertThat(order).isEqualTo("C::");
-  }
-
-  @Test
-  void order_coffee_with_1_sugar_should_return_C10() {
-    String order = coffeeMachine.order(Drink.COFFEE, Sugar.ONE);
-    assertThat(order).isEqualTo("C:1:0");
-  }
-
-  @Test
-  void order_coffee_with_2_sugar_should_return_C20() {
-    String order = coffeeMachine.order(Drink.COFFEE, Sugar.TWO);
-    assertThat(order).isEqualTo("C:2:0");
-  }
-
-  @Test
-  void order_tea_with_1_sugar_should_return_T10() {
-    String order = coffeeMachine.order(Drink.TEA, Sugar.ONE);
-    assertThat(order).isEqualTo("T:1:0");
-  }
-
-  @Test
-  void order_tea_with_2_sugar_should_return_T20() {
-    String order = coffeeMachine.order(Drink.TEA, Sugar.TWO);
-    assertThat(order).isEqualTo("T:2:0");
-  }
-
-  @Test
-  void order_tea_with_0_sugar_should_return_T() {
-    String order = coffeeMachine.order(Drink.TEA, Sugar.ZERO);
-    assertThat(order).isEqualTo("T::");
-  }
-
-  @Test
-  void order_chocolate_with_1_sugar_should_return_H10() {
-    String order = coffeeMachine.order(Drink.CHOCOLATE, Sugar.ONE);
-    assertThat(order).isEqualTo("H:1:0");
-  }
-
-  @Test
-  void order_chocolate_with_2_sugar_should_return_H20() {
-    String order = coffeeMachine.order(Drink.CHOCOLATE, Sugar.TWO);
-    assertThat(order).isEqualTo("H:2:0");
-  }
-
-  @Test
-  void order_chocolate_with_0_sugar_should_return_H() {
-    String order = coffeeMachine.order(Drink.CHOCOLATE, Sugar.ZERO);
-    assertThat(order).isEqualTo("H::");
-  }
-
-  @Test
   void message_should_return_the_message() {
     String message = coffeeMachine.message("some message ...");
     assertThat(message).isEqualTo("M:some message ...");
+  }
+
+  @Test
+  void customer_have_enough_money_to_make_order() {
+    Order order = new Order(COFFEE, ONE);
+    String orderMessage = new CoffeeMachine().makeOrder(order, new Amount(new BigDecimal("1.0")));
+    assertThat(orderMessage).isEqualTo("C:1:0");
+  }
+
+  @Test
+  void customer_does_not_have_enough_money_to_make_order() {
+    Order order = new Order(COFFEE, ONE);
+    String orderMessage = new CoffeeMachine().makeOrder(order, new Amount(new BigDecimal("0.2")));
+    assertThat(orderMessage).isEqualTo("M:Missing 0.4");
   }
 }
