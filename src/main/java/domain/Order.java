@@ -13,6 +13,10 @@ public class Order {
     this.sugar = drink.equals(ORANGE_JUICE) ? ZERO : sugar;
   }
 
+  public Drink drink() {
+    return drink;
+  }
+
   public String code() {
     return drink.code() + sugar.sugarsAndStickCode();
   }
